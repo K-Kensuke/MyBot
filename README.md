@@ -1,5 +1,6 @@
 MyBot
 ---
+TwitterのBot（@kensuke_lynx）．
 
 Auther
 ---
