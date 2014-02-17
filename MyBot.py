@@ -51,7 +51,10 @@ if 2150 < time < 2210:
 	tweet_text = "@" + "kensuke_linx" + " " + u"10時です．もうそろそろ寝よう."
 	# Tweetする
 	api.PostUpdate(status=tweet_text)
-else:
+elif 550 < time < 610:
 	tweet_text = "@" + "kensuke_linx" + " " + u"6時です．もうそろそろ起きよう．"
 	# Tweetする
+	api.PostUpdate(status=tweet_text)
+else:
+	tweet_text = "Error"
 	api.PostUpdate(status=tweet_text)
