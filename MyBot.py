@@ -19,7 +19,7 @@ access_token_secret = t_key.access_token_secret
 # 認証鍵を使ってOAuth認証を行い，APIを取得する
 api = twitter.Api(api_key, api_secret, access_token_key, access_token_secret)
 
-
+# 現在時刻を取得する
 hour = datetime.datetime.today().hour
 minute = datetime.datetime.today().minute
 
@@ -43,10 +43,6 @@ else:
 	#stringをintに変換
 	time = int(time_string)
 
-# Tweetする内容
-# 日本語の入った文字列は，uをつけてUTF-8であることを明示する
-
-# flgがFalseの場合
 if 2150 < time < 2210:
 	tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
 	# Tweetする
