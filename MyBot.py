@@ -48,7 +48,7 @@ else:
 
 # flgがFalseの場合
 if 2150 < time < 2210:
-	tweet_text = "@" + "kensuke_linx" + " " + u"10時です．もうそろそろ寝よう."
+	tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
 	# Tweetする
 	api.PostUpdate(status=tweet_text)
 elif 550 < time < 610:
