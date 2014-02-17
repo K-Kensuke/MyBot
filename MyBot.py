@@ -56,5 +56,5 @@ elif 550 < time < 610:
 	# Tweetする
 	api.PostUpdate(status=tweet_text)
 else:
-	tweet_text = "Error"
+	tweet_text = "@" + "kensuke_linx" + " " + "Error"
 	api.PostUpdate(status=tweet_text)
