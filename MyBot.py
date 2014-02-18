@@ -79,5 +79,6 @@ elif 550 < time < 610:
 
 	api.PostUpdate(status=weather_Takatsuki)
 else:
-	tweet_text = "@" + "kensuke_linx" + " " + "Error"
-	api.PostUpdate(status=tweet_text)
+	#tweet_text = "@" + "kensuke_linx" + " " + "Error"
+	#api.PostUpdate(status=tweet_text)
+	print 'Error'
