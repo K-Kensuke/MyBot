@@ -78,10 +78,6 @@ elif 550 < time < 610:
 			 + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
 	api.PostUpdate(status=weather_Takatsuki)
-elif 800 < time < 820:
-	tweet_text = "@" + "kensuke_linx" + " " + u"Test"
-
-	api.PostUpdate(status=tweet_text)
 else:
 	tweet_text = "@" + "kensuke_linx" + " " + "Error"
 	api.PostUpdate(status=tweet_text)
