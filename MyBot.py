@@ -8,7 +8,7 @@ http://opensource.org/licenses/mit-license.php
 """
 __author__ = 'kousaka'
 
-import twitter, t_key, datetime, math
+import twitter, t_key, datetime, math, pywapi
 
 # 認証鍵の取得
 api_key = t_key.consumer_key
@@ -43,13 +43,25 @@ else:
 	#stringをintに変換
 	time = int(time_string)
 
+# 天気情報を取得（神戸）
+weather_com_result = pywapi.get_weather_from_weather_com('JAXX0040')
+
 if 2150 < time < 2210:
 	tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
+
 	# Tweetする
 	api.PostUpdate(status=tweet_text)
 elif 550 < time < 610:
 	tweet_text = "@" + "kensuke_linx" + " " + u"6時です．もうそろそろ起きよう．"
+
 	# Tweetする
+	api.PostUpdate(status=tweet_text)
+
+	# 天気情報をTweetする
+	tweet_text = "@" + "kensuke_linx" + " " + u"今日の神戸の天気は" \
+				 + weather_com_result['current_conditions']['text'] + u"，気温は" \
+				 + weather_com_result['current_conditions']['temperature'] + u"℃です．"
+
 	api.PostUpdate(status=tweet_text)
 else:
 	tweet_text = "@" + "kensuke_linx" + " " + "Error"
