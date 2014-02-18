@@ -58,9 +58,14 @@ elif 550 < time < 610:
 	api.PostUpdate(status=tweet_text)
 
 	# 天気情報をTweetする
-	tweet_text = "@" + "kensuke_linx" + " " + u"今日の神戸の天気は" \
-				 + weather_com_result['current_conditions']['text'] + u"，気温は" \
-				 + weather_com_result['current_conditions']['temperature'] + u"℃です．"
+	#tweet_text = "@" + "kensuke_linx" + " " + u"今日の神戸の天気は" \
+	#			 + weather_com_result['current_conditions']['text'] + u"，気温は" \
+	#			 + weather_com_result['current_conditions']['temperature'] + u"℃です．"
+	tweet_text = "@" + "kensuke_linx" + " " + u"今日の神戸は" \
+				 + weather_com_result['forecasts'][0]['day']['text'] + u"，気温は"\
+				 + weather_com_result['forecasts'][0]['low'] + u"~" + weather_com_result['forecasts'][0]['high']\
+				 + u"℃，湿度は" + weather_com_result['forecasts'][0]['day']['humidity'] + u"%，降水確率は"\
+				 + weather_com_result['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
 	api.PostUpdate(status=tweet_text)
 else:
