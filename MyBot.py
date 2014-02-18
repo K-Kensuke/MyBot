@@ -43,8 +43,6 @@ else:
 	#stringをintに変換
 	time = int(time_string)
 
-# 天気情報を取得（神戸）
-weather_com_result = pywapi.get_weather_from_weather_com('JAXX0040')
 
 if 2150 < time < 2210:
 	tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
@@ -57,17 +55,29 @@ elif 550 < time < 610:
 	# Tweetする
 	api.PostUpdate(status=tweet_text)
 
-	# 天気情報をTweetする
-	#tweet_text = "@" + "kensuke_linx" + " " + u"今日の神戸の天気は" \
-	#			 + weather_com_result['current_conditions']['text'] + u"，気温は" \
-	#			 + weather_com_result['current_conditions']['temperature'] + u"℃です．"
-	tweet_text = "@" + "kensuke_linx" + " " + u"今日の神戸は" \
-				 + weather_com_result['forecasts'][0]['day']['text'] + u"，気温は"\
-				 + weather_com_result['forecasts'][0]['low'] + u"~" + weather_com_result['forecasts'][0]['high']\
-				 + u"℃，湿度は" + weather_com_result['forecasts'][0]['day']['humidity'] + u"%，降水確率は"\
-				 + weather_com_result['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
-	api.PostUpdate(status=tweet_text)
+	# 天気情報を取得（神戸と高槻）
+	result_Kobe = pywapi.get_weather_from_weather_com('JAXX0040')
+	result_Takatsuki = pywapi.get_weather_from_weather_com('JAXX0083')
+
+	# 神戸の天気情報をTweetする
+	weather_Kobe = "@" + "kensuke_linx" + " " + u"今日の神戸は" \
+				 + result_Kobe['forecasts'][0]['day']['text'] + u"，気温は"\
+				 + result_Kobe['forecasts'][0]['low'] + u"~" + result_Kobe['forecasts'][0]['high']\
+				 + u"℃，湿度は" + result_Kobe['forecasts'][0]['day']['humidity'] + u"%，降水確率は"\
+				 + result_Kobe['forecasts'][0]['day']['chance_precip'] + u"%です．"
+
+	api.PostUpdate(status=weather_Kobe)
+
+
+	# 高槻の天気情報をTweetする
+	weather_Takatsuki = "@" + "kensuke_linx" + " " + u"今日の高槻は" \
+			 + result_Takatsuki['forecasts'][0]['day']['text'] + u"，気温は"\
+			 + result_Takatsuki['forecasts'][0]['low'] + u"~" + result_Takatsuki['forecasts'][0]['high']\
+			 + u"℃，湿度は" + result_Takatsuki['forecasts'][0]['day']['humidity'] + u"%，降水確率は"\
+			 + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
+
+	api.PostUpdate(status=weather_Takatsuki)
 else:
 	tweet_text = "@" + "kensuke_linx" + " " + "Error"
 	api.PostUpdate(status=tweet_text)
