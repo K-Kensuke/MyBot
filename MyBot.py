@@ -8,7 +8,7 @@ http://opensource.org/licenses/mit-license.php
 """
 __author__ = 'kousaka'
 
-import twitter, t_key, datetime, math, pywapi
+import twitter, t_key, datetime, pywapi
 
 # 認証鍵の取得
 api_key = t_key.consumer_key
@@ -24,7 +24,7 @@ hour = datetime.datetime.today().hour
 minute = datetime.datetime.today().minute
 
 # minuteが1桁の場合
-if 1 == int(math.log10(minute) + 1):
+if minute < 10:
 	#hourとminuteをstringに変換
 	hour_string = str(hour)
 	minute_string = '0' + str(minute)
