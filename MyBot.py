@@ -8,7 +8,7 @@ http://opensource.org/licenses/mit-license.php
 """
 __author__ = 'kousaka'
 
-import twitter, t_key, datetime, pywapi
+import twitter, t_key, datetime, pywapi, re
 
 # 認証鍵の取得
 api_key = t_key.consumer_key
@@ -43,13 +43,51 @@ else:
 	#stringをintに変換
 	time = int(time_string)
 
-
-if 2150 < time < 2210:
+# 5:50~6:10
+if 550 < time < 610:
 	tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
 
 	# Tweetする
 	api.PostUpdate(status=tweet_text)
-elif 550 < time < 610:
+
+# 12:50~13:10
+elif 1250 < time < 1310:
+	# HomeTimelineを取得する（リプライを除去した直近の100個）
+	timeline = api.GetHomeTimeline(count=100, exclude_replies=True)
+
+	# IFTTTが自動TweetしたUP by JawboneのSleep Feedを入れるリスト
+	matchList = []
+
+	# Sleep Feedのみを抽出する
+	for match in timeline:
+		regex = re.match('I fell asleep', match.text)
+
+		if regex is not None:
+			matchList.append(match.text)
+
+	# 最新のSleep Feedを入れる
+	sleepLog = matchList[0]
+
+	# パーセント表示が小数点以下1桁の場合と2桁の場合で条件分けする
+	regex = re.match('\(', sleepLog[sleepLog.index('%')-5])
+
+	if regex is not None:
+		# 小数点以下1桁の場合
+		percentageOfDeepSleep = sleepLog[sleepLog.index('%')-4:sleepLog.index('%')-2]
+
+	else:
+		percentageOfDeepSleep = sleepLog[sleepLog.index('%')-5:sleepLog.index('%')-3]
+
+	# Stringをintにする
+	deepSleep = int(percentageOfDeepSleep)
+
+	if deepSleep < 60:
+		tweet_text = "@" + "kensuke_linx" + " " + u"睡眠が足りていません．昼寝をおすすめします．"
+
+		api.PostUpdate(status=tweet_text)
+
+# 21:50~22:10
+elif 2150 < time < 2210:
 	tweet_text = "@" + "kensuke_linx" + " " + u"6時です．もうそろそろ起きよう．"
 
 	# Tweetする
@@ -78,6 +116,7 @@ elif 550 < time < 610:
 			 + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
 	api.PostUpdate(status=weather_Takatsuki)
+
 else:
 	tweet_text = "@" + "kensuke_linx" + " " + "Error"
 	api.PostUpdate(status=tweet_text)
