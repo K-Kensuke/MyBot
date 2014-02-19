@@ -6,7 +6,7 @@ This software is released under the MIT License
 
 http://opensource.org/licenses/mit-license.php
 """
-__author__ = 'kousaka'
+__author__ = 'Kensuke Kousaka'
 
 import datetime
 import pywapi
