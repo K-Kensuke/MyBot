@@ -63,20 +63,20 @@ elif 620 < time < 640:
 	result_Takatsuki = pywapi.get_weather_from_weather_com('JAXX0083')
 
 	# 神戸の天気情報をTweetする
-	weather_Kobe = "@" + "kensuke_linx" + " " + u"今日の神戸は" \
-					+ result_Kobe['forecasts'][0]['day']['text'] + u"，気温は" \
-					+ result_Kobe['forecasts'][0]['low'] + u"~" + result_Kobe['forecasts'][0]['high'] \
-					+ u"℃，湿度は" + result_Kobe['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
-					+ result_Kobe['forecasts'][0]['day']['chance_precip'] + u"%です．"
+	weather_Kobe = "@" + "kensuke_linx" + " " + u"今日の神戸は"\
+					 + result_Kobe['forecasts'][0]['day']['text'] + u"，気温は"\
+					 + result_Kobe['forecasts'][0]['low'] + u"~" + result_Kobe['forecasts'][0]['high']\
+					 + u"℃，湿度は" + result_Kobe['forecasts'][0]['day']['humidity'] + u"%，降水確率は"\
+					 + result_Kobe['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
 	api.PostUpdate(status=weather_Kobe)
 
 	# 高槻の天気情報をTweetする
-	weather_Takatsuki = "@" + "kensuke_linx" + " " + u"今日の高槻は" \
-						+ result_Takatsuki['forecasts'][0]['day']['text'] + u"，気温は" \
-						+ result_Takatsuki['forecasts'][0]['low'] + u"~" + result_Takatsuki['forecasts'][0]['high'] \
-						+ u"℃，湿度は" + result_Takatsuki['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
-						+ result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
+	weather_Takatsuki = "@" + "kensuke_linx" + " " + u"今日の高槻は"\
+						 + result_Takatsuki['forecasts'][0]['day']['text'] + u"，気温は"\
+						 + result_Takatsuki['forecasts'][0]['low'] + u"~" + result_Takatsuki['forecasts'][0]['high']\
+						 + u"℃，湿度は" + result_Takatsuki['forecasts'][0]['day']['humidity'] + u"%，降水確率は"\
+						 + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
 	api.PostUpdate(status=weather_Takatsuki)
 
@@ -112,7 +112,8 @@ elif 1250 < time < 1310:
 	deepSleep = int(percentageOfDeepSleep)
 
 	if deepSleep < 60:
-		tweet_text = "@" + "kensuke_linx" + " " + u"睡眠が足りていません．昼寝をおすすめします．"
+		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + deepSleep + u"%でした．"\
+					 + u" " + u"睡眠が足りていません．昼寝をおすすめします．"
 
 		api.PostUpdate(status=tweet_text)
 
