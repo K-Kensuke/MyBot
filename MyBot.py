@@ -116,6 +116,10 @@ elif 1250 < time < 1310:
 					 + u" " + u"睡眠が足りていません．昼寝をおすすめします．"
 
 		api.PostUpdate(status=tweet_text)
+	else:
+		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + deepSleep + u"%でした．"
+
+		api.PostUpdate(status=tweet_text)
 
 # 21:50~22:10
 elif 2150 < time < 2210:
