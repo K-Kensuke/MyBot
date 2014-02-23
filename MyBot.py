@@ -121,6 +121,20 @@ elif 1250 < time < 1310:
 
 		api.PostUpdate(status=tweet_text)
 
+# 20:50~21:10
+elif 2050 < time < 2110:
+	tweet_text = "@" + "kensuke_linx" + " " + u"就寝1時間前です．そろそろお風呂に入ろう．"
+
+	# Tweetする
+	api.PostUpdate(status=tweet_text)
+
+# 21:20~21:40
+elif 2120 < time < 2140:
+	tweet_text = "@" + "kensuke_linx" + " " + u"電子機器の電源をすべて切って，寝るだけにしよう．"
+
+	# Tweetする
+	api.PostUpdate(status=tweet_text)
+
 # 21:50~22:10
 elif 2150 < time < 2210:
 	tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
