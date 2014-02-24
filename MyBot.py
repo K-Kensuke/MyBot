@@ -112,12 +112,12 @@ elif 1250 < time < 1310:
 	deepSleep = int(percentageOfDeepSleep)
 
 	if deepSleep < 60:
-		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + deepSleep + u"%でした．"\
+		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + str(deepSleep) + u"%でした．"\
 					 + u" " + u"睡眠が足りていません．昼寝をおすすめします．"
 
 		api.PostUpdate(status=tweet_text)
 	else:
-		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + deepSleep + u"%でした．"
+		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + str(deepSleep) + u"%でした．"
 
 		api.PostUpdate(status=tweet_text)
 
