@@ -80,6 +80,12 @@ elif 620 < time < 640:
 
 	api.PostUpdate(status=weather_Takatsuki)
 
+# 6:35~6:55
+elif 635 < time < 655:
+	tweet_text = "@" + "kensuke_linx" + " " + u"シャワーして目を醒まそう"
+
+	api.PostUpdate(status=tweet_text)
+
 # 12:50~13:10
 elif 1250 < time < 1310:
 	# HomeTimelineを取得する（リプライを除去した直近の100個）
