@@ -29,25 +29,16 @@ api = twitter.Api(api_key, api_secret, access_token_key, access_token_secret)
 hour = datetime.datetime.today().hour
 minute = datetime.datetime.today().minute
 
+hour_string = str(hour)
+
 # minuteが1桁の場合
 if minute < 10:
-	#hourとminuteをstringに変換
-	hour_string = str(hour)
 	minute_string = '0' + str(minute)
-
-	time_string = hour_string + minute_string
-
-	#stringをintに変換
-	time = int(time_string)
+# minuteが2桁の場合
 else:
-	#hourとminuteをstringに変換
-	hour_string = str(hour)
 	minute_string = str(minute)
 
-	time_string = hour_string + minute_string
-
-	#stringをintに変換
-	time = int(time_string)
+time = int(hour_string + minute_string)
 
 # 5:50~6:10
 if 550 < time < 610:
