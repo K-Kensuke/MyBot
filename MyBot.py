@@ -78,45 +78,45 @@ elif 635 < time < 655:
 	api.PostUpdate(status=tweet_text)
 
 # 12:50~13:10
-elif 1250 < time < 1310:
-	# HomeTimelineを取得する（リプライを除去した直近の100個）
-	timeline = api.GetHomeTimeline(count=100, exclude_replies=True)
-
-	# IFTTTが自動TweetしたUP by JawboneのSleep Feedを入れるリスト
-	matchList = []
-
-	# Sleep Feedのみを抽出する
-	for match in timeline:
-		regex = re.match('I fell asleep', match.text)
-
-		if regex is not None:
-			matchList.append(match.text)
-
-	# 最新のSleep Feedを入れる
-	sleepLog = matchList[0]
-
-	# パーセント表示が小数点以下1桁の場合と2桁の場合で条件分けする
-	regex = re.match('\(', sleepLog[sleepLog.index('%') - 5])
-
-	if regex is not None:
-		# 小数点以下1桁の場合
-		percentageOfDeepSleep = sleepLog[sleepLog.index('%') - 4:sleepLog.index('%') - 2]
-
-	else:
-		percentageOfDeepSleep = sleepLog[sleepLog.index('%') - 5:sleepLog.index('%') - 3]
-
-	# Stringをintにする
-	deepSleep = int(percentageOfDeepSleep)
-
-	if deepSleep < 60:
-		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + str(deepSleep) + u"%でした．"\
-					 + u" " + u"睡眠が足りていません．昼寝をおすすめします．"
-
-		api.PostUpdate(status=tweet_text)
-	else:
-		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + str(deepSleep) + u"%でした．"
-
-		api.PostUpdate(status=tweet_text)
+# elif 1250 < time < 1310:
+# 	# HomeTimelineを取得する（リプライを除去した直近の100個）
+# 	timeline = api.GetHomeTimeline(count=100, exclude_replies=True)
+#
+# 	# IFTTTが自動TweetしたUP by JawboneのSleep Feedを入れるリスト
+# 	matchList = []
+#
+# 	# Sleep Feedのみを抽出する
+# 	for match in timeline:
+# 		regex = re.match('I fell asleep', match.text)
+#
+# 		if regex is not None:
+# 			matchList.append(match.text)
+#
+# 	# 最新のSleep Feedを入れる
+# 	sleepLog = matchList[0]
+#
+# 	# パーセント表示が小数点以下1桁の場合と2桁の場合で条件分けする
+# 	regex = re.match('\(', sleepLog[sleepLog.index('%') - 5])
+#
+# 	if regex is not None:
+# 		# 小数点以下1桁の場合
+# 		percentageOfDeepSleep = sleepLog[sleepLog.index('%') - 4:sleepLog.index('%') - 2]
+#
+# 	else:
+# 		percentageOfDeepSleep = sleepLog[sleepLog.index('%') - 5:sleepLog.index('%') - 3]
+#
+# 	# Stringをintにする
+# 	deepSleep = int(percentageOfDeepSleep)
+#
+# 	if deepSleep < 60:
+# 		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + str(deepSleep) + u"%でした．"\
+# 					 + u" " + u"睡眠が足りていません．昼寝をおすすめします．"
+#
+# 		api.PostUpdate(status=tweet_text)
+# 	else:
+# 		tweet_text = "@" + "kensuke_linx" + " " + u"今朝は深い睡眠が" + str(deepSleep) + u"%でした．"
+#
+# 		api.PostUpdate(status=tweet_text)
 
 # 20:50~21:10
 elif 2050 < time < 2110:
