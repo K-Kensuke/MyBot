@@ -99,10 +99,6 @@ def main(argv):
         # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    else:
-        tweet_text = "@" + "kensuke_linx" + " " + "Error"
-        api.PostUpdate(status=tweet_text)
-
 
 if __name__ == '__main__':
     main(sys.argv)
