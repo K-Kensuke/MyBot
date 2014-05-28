@@ -19,7 +19,7 @@ def main(argv):
     # Twitter APIにアクセスできるように認証を行う
     api = authtwitter.main()
 
-    if len(argv) > 0:
+    if len(argv) > 1:
         if 'login' in argv[1]:
             now = datetime.datetime.today()
             tweet_text = "@" + "kensuke_linx" + " " + "'" + argv[2] + "'" + " " + "has logged in from" + " " \
