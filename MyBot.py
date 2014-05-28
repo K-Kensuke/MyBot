@@ -23,7 +23,7 @@ def main(argv):
         if 'login' in argv[1]:
             now = datetime.datetime.today()
             tweet_text = "@" + "kensuke_linx" + " " + "'" + argv[2] + "'" + " " + "has logged in from" + " " \
-                         + argv[3] + " " + "at" + now.strftime("%Y-%m-%d %H:%M:%S")
+                         + argv[3] + " " + "at" + " " + now.strftime("%Y-%m-%d %H:%M:%S")
 
             api.PostUpdate(status=tweet_text)
 
