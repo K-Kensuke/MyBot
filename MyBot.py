@@ -20,9 +20,6 @@ def main(argv):
     # Twitter APIにアクセスできるように認証を行う
     api = authtwitter.main()
 
-    # Google Calendar APIを用いて，イベント情報を取得する
-    entireEvent = getEvent.main(argv)
-
     if len(argv) > 1:
         if 'login' in argv[1]:
             now = datetime.datetime.today()
@@ -76,21 +73,26 @@ def main(argv):
 
         api.PostUpdate(status=weather_Takatsuki)
 
-        # イベント情報を呟く
-        tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あります．"
-        api.PostUpdate(status=tweet_text)
+        # Google Calendar APIを用いて，イベント情報を取得する
+        if len(argv) <= 1 or len(argv) == 2 and '--noauth_local_webserver' in argv[1]:
+            entireEvent = getEvent.main(argv)
 
-        num = 0
-        while num < len(entireEvent):
-            eventItem = entireEvent[num]
-            eventSummary = eventItem[0]
-            eventTime = eventItem[1]
 
-            tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
-                         + " " + eventTime + " " + u"です．"
+            # イベント情報を呟く
+            tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あります．"
             api.PostUpdate(status=tweet_text)
 
-            num += 1
+            num = 0
+            while num < len(entireEvent):
+                eventItem = entireEvent[num]
+                eventSummary = eventItem[0]
+                eventTime = eventItem[1]
+
+                tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
+                             + " " + eventTime + " " + u"です．"
+                api.PostUpdate(status=tweet_text)
+
+                num += 1
 
     # 6:35~6:55
     elif 635 < time < 655:
