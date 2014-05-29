@@ -22,8 +22,6 @@ def main(argv):
 
     # Google Calendar APIを用いて，イベント情報を取得する
     entireEvent = getEvent.main(argv)
-    print entireEvent
-
 
     if len(argv) > 1:
         if 'login' in argv[1]:
