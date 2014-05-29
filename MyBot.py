@@ -11,6 +11,7 @@ __author__ = 'Kensuke Kousaka'
 import datetime
 import pywapi
 import authtwitter
+import getEvent
 
 import sys
 
@@ -18,6 +19,11 @@ import sys
 def main(argv):
     # Twitter APIにアクセスできるように認証を行う
     api = authtwitter.main()
+
+    # Google Calendar APIを用いて，イベント情報を取得する
+    entireEvent = getEvent.main(argv)
+    print entireEvent
+
 
     if len(argv) > 1:
         if 'login' in argv[1]:
@@ -71,6 +77,22 @@ def main(argv):
                             + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
 
         api.PostUpdate(status=weather_Takatsuki)
+
+        # イベント情報を呟く
+        tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あります．"
+        api.PostUpdate(status=tweet_text)
+
+        num = 0
+        while num < len(entireEvent):
+            eventItem = entireEvent[num]
+            eventSummary = eventItem[0]
+            eventTime = eventItem[1]
+
+            tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
+                         + " " + eventTime + " " + u"です．"
+            api.PostUpdate(status=tweet_text)
+
+            num += 1
 
     # 6:35~6:55
     elif 635 < time < 655:

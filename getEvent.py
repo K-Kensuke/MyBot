@@ -35,7 +35,8 @@ def main(argv):
     # Returns entries on the user's calendar list.
     calendars = service.calendarList().list().execute()
 
-    getevent(nowstr, service, calendars)
+    entireEvent = getevent(nowstr, service, calendars)
+    return entireEvent
 
 
 def getservice(argv):
@@ -64,6 +65,8 @@ def getservice(argv):
 
 
 def getevent(nowstr, service, calendars):
+    eventDict = {}
+
     # パラメータリスト https://developers.google.com/google-apps/calendar/v3/reference/events/list?hl.ja
     # singleEventsクエリをTrueにすることで，繰り返しの予定をバラして表示する
     for calendar in calendars['items']:
@@ -103,9 +106,8 @@ def getevent(nowstr, service, calendars):
 
                 if diffDate == 0:
                     if nowstr in startdate:
-                        print event['summary']
                         if starttime is not None:
-                            print starttime
+                            eventDict[event['summary']] = starttime
                 else:
                     num = 0
                     while num <= diffDate:
@@ -113,10 +115,12 @@ def getevent(nowstr, service, calendars):
                         tmpstr = tmp.strftime('%Y-%m-%d')
 
                         if nowstr in tmpstr:
-                            print event['summary']
                             if starttime is not None:
-                                print starttime
-                            num += 1
+                                eventDict[event['summary']] = starttime
+                        num += 1
+
+    entireEvent = eventDict.items()
+    return entireEvent
 
 
 if __name__ == '__main__':
