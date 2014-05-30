@@ -47,7 +47,7 @@ def getservice(argv):
         print ""
         sys.exit()
 
-    storage = Storage('calendar.dat')
+    storage = Storage('/home/ken/MyBot/calendar.dat')
     credentials = storage.get()
     if not credentials or credentials.invalid:
         flow = OAuth2WebServerFlow(
