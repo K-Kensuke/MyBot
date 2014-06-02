@@ -20,38 +20,22 @@ def main(argv):
     # Twitter APIにアクセスできるように認証を行う
     api = authtwitter.main()
 
-    if len(argv) > 1:
-        if 'login' in argv[1]:
-            now = datetime.datetime.today()
-            tweet_text = "@" + "kensuke_linx" + " " + "'" + argv[2] + "'" + " " + "has logged in from" + " " \
-                         + argv[3] + " " + "at" + " " + now.strftime("%Y-%m-%d %H:%M:%S")
+    if 'Login' in argv[1]:
+        now = datetime.datetime.today()
+        tweet_text = "@" + "kensuke_linx" + " " + "'" + argv[2] + "'" + " " + "has logged in from" + " " \
+                     + argv[3] + " " + "at" + " " + now.strftime("%Y-%m-%d %H:%M:%S")
 
-            api.PostUpdate(status=tweet_text)
+        api.PostUpdate(status=tweet_text)
 
-    # 現在時刻を取得する
-    hour = datetime.datetime.today().hour
-    minute = datetime.datetime.today().minute
-
-    hour_string = str(hour)
-
-    # minuteが1桁の場合
-    if minute < 10:
-        minute_string = '0' + str(minute)
-    # minuteが2桁の場合
-    else:
-        minute_string = str(minute)
-
-    time = int(hour_string + minute_string)
-
-    # 5:50~6:10
-    if 550 < time < 610:
+    # 6:00
+    elif 'Wakeup' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"6時です．もうそろそろ起きよう．"
 
         # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    # 6:20~6:40
-    elif 620 < time < 640:  # 天気情報を取得（神戸と高槻）
+    # 6:30
+    elif 'WeatherAndEvent' in argv[1]:  # 天気情報を取得（神戸と高槻）
         result_Kobe = pywapi.get_weather_from_weather_com('JAXX0040')
         result_Takatsuki = pywapi.get_weather_from_weather_com('JAXX0083')
 
@@ -74,48 +58,47 @@ def main(argv):
         api.PostUpdate(status=weather_Takatsuki)
 
         # Google Calendar APIを用いて，イベント情報を取得する
-        if len(argv) <= 1 or len(argv) == 2 and '--noauth_local_webserver' in argv[1]:
-            entireEvent = getEvent.main(argv)
+        entireEvent = getEvent.main(argv)
 
 
-            # イベント情報を呟く
-            tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あります．"
+        # イベント情報を呟く
+        tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あります．"
+        api.PostUpdate(status=tweet_text)
+
+        num = 0
+        while num < len(entireEvent):
+            eventItem = entireEvent[num]
+            eventSummary = eventItem[0]
+            eventTime = eventItem[1]
+
+            tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
+                         + " " + eventTime + " " + u"です．"
             api.PostUpdate(status=tweet_text)
 
-            num = 0
-            while num < len(entireEvent):
-                eventItem = entireEvent[num]
-                eventSummary = eventItem[0]
-                eventTime = eventItem[1]
+            num += 1
 
-                tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
-                             + " " + eventTime + " " + u"です．"
-                api.PostUpdate(status=tweet_text)
-
-                num += 1
-
-    # 6:35~6:55
-    elif 635 < time < 655:
+    # 6:45
+    elif 'Shower' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"シャワーして目を醒まそう"
 
         api.PostUpdate(status=tweet_text)  # 12:50~13:10
 
-    # 20:50~21:10
-    elif 2050 < time < 2110:
+    # 21:00
+    elif 'Bath' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"就寝1時間前です．そろそろお風呂に入ろう．"
 
         # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    # 21:20~21:40
-    elif 2120 < time < 2140:
+    # 21:30
+    elif 'BeforeSleep' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"電子機器の電源をすべて切って，寝るだけにしよう．"
 
         # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    # 21:50~22:10
-    elif 2150 < time < 2210:
+    # 22:00
+    elif 'Sleep' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
 
         # Tweetする
