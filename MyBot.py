@@ -90,12 +90,12 @@ def main(argv):
         # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    # 21:30
-    elif 'BeforeSleep' in argv[1]:
-        tweet_text = "@" + "kensuke_linx" + " " + u"電子機器の電源をすべて切って，寝るだけにしよう．"
-
-        # Tweetする
-        api.PostUpdate(status=tweet_text)
+    # # 21:30
+    # elif 'BeforeSleep' in argv[1]:
+    #     tweet_text = "@" + "kensuke_linx" + " " + u"電子機器の電源をすべて切って，寝るだけにしよう．"
+    #
+    #     # Tweetする
+    #     api.PostUpdate(status=tweet_text)
 
     # 22:00
     elif 'Sleep' in argv[1]:
