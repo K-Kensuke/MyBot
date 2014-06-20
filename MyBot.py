@@ -104,6 +104,16 @@ def main(argv):
         # Tweetする
         api.PostUpdate(status=tweet_text)
 
+    elif 'Success' in argv[1]:
+        tweet_text = "@" + "kensuke_linx" + " " + u"Task is complete!"
+
+        api.PostUpdate(status=tweet_text)
+
+    elif 'Failure' in argv[1]:
+        tweet_text = "@" + "kensuke_linx" + " " + u"Task failed"
+
+        api.PostUpdate(status=tweet_text)
+
 
 if __name__ == '__main__':
     main(sys.argv)
