@@ -15,6 +15,8 @@ import getEvent
 
 import sys
 
+import subprocess
+
 
 def main(argv):
     # Twitter APIにアクセスできるように認証を行う
@@ -111,6 +113,13 @@ def main(argv):
 
     elif 'Failure' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"Task failed"
+
+        api.PostUpdate(status=tweet_text)
+
+    elif 'CPUtemp' in argv[1]:
+        cputemp = subprocess.check_output("sensors | grep 'Core 0' | awk '{ print $3 }'", shell=True)
+
+        tweet_text = "@" + "kensuke_linx" + " " + u"現在のサーバのCPU温度は，" + cputemp + u"です．"
 
         api.PostUpdate(status=tweet_text)
 
