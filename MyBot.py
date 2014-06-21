@@ -119,7 +119,7 @@ def main(argv):
     elif 'CPUtemp' in argv[1]:
         cputemp = subprocess.check_output("sensors | grep 'Core 0' | awk '{ print $3 }'", shell=True)
 
-        tweet_text = "@" + "kensuke_linx" + " " + u"現在のサーバのCPU温度は，" + cputemp + u"です．"
+        tweet_text = "@" + "kensuke_linx" + " " + u"現在のサーバのCPU温度は，" + str(cputemp) + u"です．"
 
         api.PostUpdate(status=tweet_text)
 
