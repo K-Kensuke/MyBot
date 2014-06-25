@@ -46,7 +46,7 @@ def main(argv):
                        + result_Kobe['forecasts'][0]['day']['text'] + u"，気温は" \
                        + result_Kobe['forecasts'][0]['low'] + u"~" + result_Kobe['forecasts'][0]['high'] \
                        + u"℃，湿度は" + result_Kobe['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
-                       + result_Kobe['forecasts'][0]['day']['chance_precip'] + u"%です．"
+                       + result_Kobe['forecasts'][0]['day']['chance_precip'] + u"%だよ．"
 
         api.PostUpdate(status=weather_Kobe)
 
@@ -55,7 +55,7 @@ def main(argv):
                             + result_Takatsuki['forecasts'][0]['day']['text'] + u"，気温は" \
                             + result_Takatsuki['forecasts'][0]['low'] + u"~" + result_Takatsuki['forecasts'][0]['high'] \
                             + u"℃，湿度は" + result_Takatsuki['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
-                            + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%です．"
+                            + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%だよ．"
 
         api.PostUpdate(status=weather_Takatsuki)
 
@@ -64,7 +64,7 @@ def main(argv):
 
 
         # イベント情報を呟く
-        tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あります．"
+        tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あるよ．"
         api.PostUpdate(status=tweet_text)
 
         num = 0
@@ -74,14 +74,14 @@ def main(argv):
             eventTime = eventItem[1]
 
             tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
-                         + " " + eventTime + " " + u"です．"
+                         + " " + eventTime + " " + u"だよ．"
             api.PostUpdate(status=tweet_text)
 
             num += 1
 
     # 6:45
     elif 'Shower' in argv[1]:
-        tweet_text = "@" + "kensuke_linx" + " " + u"シャワーして目を醒まそう"
+        tweet_text = "@" + "kensuke_linx" + " " + u"シャワーして目を醒まそう．"
 
         api.PostUpdate(status=tweet_text)  # 12:50~13:10
 
@@ -118,7 +118,7 @@ def main(argv):
         now = datetime.datetime.now()
         nowstr = now.strftime('%Y/%m/%d %H:%M:%S')
 
-        tweet_text = "@" + "kensuke_linx" + " " + nowstr + " " + u"Task failed"
+        tweet_text = "@" + "kensuke_linx" + " " + nowstr + " " + u"Task failed…"
 
         api.PostUpdate(status=tweet_text)
 
@@ -128,7 +128,7 @@ def main(argv):
         now = datetime.datetime.now()
         nowstr = now.strftime('%Y/%m/%d %H:%M:%S')
 
-        tweet_text = nowstr + u"現在のサーバのCPU温度は，" + decode_cputemp + u"です．"
+        tweet_text = nowstr + u"現在のサーバのCPU温度は，" + decode_cputemp + u"だよ．"
 
         api.PostUpdate(status=tweet_text)
 
