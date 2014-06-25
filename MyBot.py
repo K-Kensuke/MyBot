@@ -128,7 +128,7 @@ def main(argv):
         now = datetime.datetime.now()
         nowstr = now.strftime('%Y/%m/%d %H:%M:%S')
 
-        tweet_text = "@" + "kensuke_linx" + " " + nowstr + u"現在のサーバのCPU温度は，" + decode_cputemp + u"です．"
+        tweet_text = nowstr + u"現在のサーバのCPU温度は，" + decode_cputemp + u"です．"
 
         api.PostUpdate(status=tweet_text)
 
