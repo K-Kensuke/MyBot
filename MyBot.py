@@ -123,7 +123,7 @@ def main(argv):
         api.PostUpdate(status=tweet_text)
 
     elif 'CPUtemp' in argv[1]:
-        cputemp = subprocess.check_output("sensors | grep 'Core 0' | awk '{ print $3 }'", shell=True)
+        cputemp = subprocess.check_output("sensors | grep 'Core 0' | awk '{ print $3 }'", shell=True).rstrip()
         decode_cputemp = unicode(cputemp, "utf-8")
         now = datetime.datetime.now()
         nowstr = now.strftime('%Y/%m/%d %H:%M:%S')
