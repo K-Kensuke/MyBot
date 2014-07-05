@@ -29,14 +29,11 @@ def main(argv):
 
         api.PostUpdate(status=tweet_text)
 
-    # 6:00
     elif 'Wakeup' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"6時です．もうそろそろ起きよう．"
 
-        # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    # 6:30
     elif 'Weather' in argv[1]:  # 天気情報を取得（神戸と高槻）
         result_kobe = pywapi.get_weather_from_weather_com('JAXX0040')
         result_takatsuki = pywapi.get_weather_from_weather_com('JAXX0083')
@@ -116,7 +113,6 @@ def main(argv):
             # Google Calendar APIを用いて，イベント情報を取得する
             entire_event = getEvent.main(argv)
 
-            # イベント情報を呟く
             tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entire_event)) + u"件あるよ．"
             api.PostUpdate(status=tweet_text)
 
@@ -136,7 +132,6 @@ def main(argv):
             # Google Calendar APIを用いて，イベント情報を取得する
             entire_event = getEvent.main(argv)
 
-            # イベント情報を呟く
             tweet_text = "@" + "kensuke_linx" + " " + u"明日のイベントは，" + str(len(entire_event)) + u"件あるよ．"
             api.PostUpdate(status=tweet_text)
 
@@ -152,24 +147,24 @@ def main(argv):
 
                 num += 1
 
-    # 6:45
     elif 'Shower' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"シャワーして目を醒まそう．"
 
         api.PostUpdate(status=tweet_text)  # 12:50~13:10
 
-    # 21:00
+    elif 'GoHome' in argv[1]:
+        tweet_text = "@" + "kensuke_linx" + " " + u"学校なうなら，そろそろ帰らないと寝られないよ？"
+
+        api.PostUpdate(status=tweet_text)
+
     elif 'Bath' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"就寝1時間前です．そろそろお風呂に入ろう．"
 
-        # Tweetする
         api.PostUpdate(status=tweet_text)
 
-    # 22:00
     elif 'Sleep' in argv[1]:
         tweet_text = "@" + "kensuke_linx" + " " + u"22時です．もうそろそろ寝よう."
 
-        # Tweetする
         api.PostUpdate(status=tweet_text)
 
     elif 'Success' in argv[1]:
