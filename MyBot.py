@@ -37,47 +37,120 @@ def main(argv):
         api.PostUpdate(status=tweet_text)
 
     # 6:30
-    elif 'WeatherAndEvent' in argv[1]:  # 天気情報を取得（神戸と高槻）
-        result_Kobe = pywapi.get_weather_from_weather_com('JAXX0040')
-        result_Takatsuki = pywapi.get_weather_from_weather_com('JAXX0083')
+    elif 'Weather' in argv[1]:  # 天気情報を取得（神戸と高槻）
+        result_kobe = pywapi.get_weather_from_weather_com('JAXX0040')
+        result_takatsuki = pywapi.get_weather_from_weather_com('JAXX0083')
 
-        # 神戸の天気情報をTweetする
-        weather_Kobe = "@" + "kensuke_linx" + " " + u"今日の神戸は" \
-                       + result_Kobe['forecasts'][0]['day']['text'] + u"，気温は" \
-                       + result_Kobe['forecasts'][0]['low'] + u"~" + result_Kobe['forecasts'][0]['high'] \
-                       + u"℃，湿度は" + result_Kobe['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
-                       + result_Kobe['forecasts'][0]['day']['chance_precip'] + u"%だよ．"
+        if 'Today' in argv[2]:
+            if 'Day' in argv[3]:
+                weather_kobe = "@" + "kensuke_linx" + " " + u"今日の日中の神戸は" \
+                               + result_kobe['forecasts'][0]['day']['text'] + u"，気温は" \
+                               + result_kobe['forecasts'][0]['low'] + u"~" + result_kobe['forecasts'][0]['high'] \
+                               + u"℃，湿度は" + result_kobe['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
+                               + result_kobe['forecasts'][0]['day']['chance_precip'] + u"%だよ．"
 
-        api.PostUpdate(status=weather_Kobe)
+                api.PostUpdate(status=weather_kobe)
 
-        # 高槻の天気情報をTweetする
-        weather_Takatsuki = "@" + "kensuke_linx" + " " + u"今日の高槻は" \
-                            + result_Takatsuki['forecasts'][0]['day']['text'] + u"，気温は" \
-                            + result_Takatsuki['forecasts'][0]['low'] + u"~" + result_Takatsuki['forecasts'][0]['high'] \
-                            + u"℃，湿度は" + result_Takatsuki['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
-                            + result_Takatsuki['forecasts'][0]['day']['chance_precip'] + u"%だよ．"
+                weather_takatsuki = "@" + "kensuke_linx" + " " + u"今日の日中の高槻は" \
+                                    + result_takatsuki['forecasts'][0]['day']['text'] + u"，気温は" \
+                                    + result_takatsuki['forecasts'][0]['low'] + u"~" + result_takatsuki['forecasts'][0]['high'] \
+                                    + u"℃，湿度は" + result_takatsuki['forecasts'][0]['day']['humidity'] + u"%，降水確率は" \
+                                    + result_takatsuki['forecasts'][0]['day']['chance_precip'] + u"%だよ．"
 
-        api.PostUpdate(status=weather_Takatsuki)
+                api.PostUpdate(status=weather_takatsuki)
 
-        # Google Calendar APIを用いて，イベント情報を取得する
-        entireEvent = getEvent.main(argv)
+            elif 'Night' in argv[3]:
+                weather_kobe = "@" + "kensuke_linx" + " " + u"今日の夜の神戸は" \
+                               + result_kobe['forecasts'][0]['night']['text'] + u"，気温は" \
+                               + result_kobe['forecasts'][0]['low'] + u"~" + result_kobe['forecasts'][0]['high'] \
+                               + u"℃，湿度は" + result_kobe['forecasts'][0]['night']['humidity'] + u"%，降水確率は" \
+                               + result_kobe['forecasts'][0]['night']['chance_precip'] + u"%だよ．"
 
+                api.PostUpdate(status=weather_kobe)
 
-        # イベント情報を呟く
-        tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entireEvent)) + u"件あるよ．"
-        api.PostUpdate(status=tweet_text)
+                weather_takatsuki = "@" + "kensuke_linx" + " " + u"今日の夜の高槻は" \
+                                    + result_takatsuki['forecasts'][0]['night']['text'] + u"，気温は" \
+                                    + result_takatsuki['forecasts'][0]['low'] + u"~" + result_takatsuki['forecasts'][0]['high'] \
+                                    + u"℃，湿度は" + result_takatsuki['forecasts'][0]['night']['humidity'] + u"%，降水確率は" \
+                                    + result_takatsuki['forecasts'][0]['night']['chance_precip'] + u"%だよ．"
 
-        num = 0
-        while num < len(entireEvent):
-            eventItem = entireEvent[num]
-            eventSummary = eventItem[0]
-            eventTime = eventItem[1]
+                api.PostUpdate(status=weather_takatsuki)
 
-            tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + eventSummary + " " + u"で，開始時間は" \
-                         + " " + eventTime + " " + u"だよ．"
+        elif 'Tomorrow' in argv[2]:
+            if 'Day' in argv[3]:
+                weather_kobe = "@" + "kensuke_linx" + " " + u"明日の日中の神戸は" \
+                               + result_kobe['forecasts'][1]['day']['text'] + u"，気温は" \
+                               + result_kobe['forecasts'][1]['low'] + u"~" + result_kobe['forecasts'][1]['high'] \
+                               + u"℃，湿度は" + result_kobe['forecasts'][1]['day']['humidity'] + u"%，降水確率は" \
+                               + result_kobe['forecasts'][1]['day']['chance_precip'] + u"%だよ．"
+
+                api.PostUpdate(status=weather_kobe)
+
+                weather_takatsuki = "@" + "kensuke_linx" + " " + u"明日の日中の高槻は" \
+                                    + result_takatsuki['forecasts'][1]['day']['text'] + u"，気温は" \
+                                    + result_takatsuki['forecasts'][1]['low'] + u"~" + result_takatsuki['forecasts'][1]['high'] \
+                                    + u"℃，湿度は" + result_takatsuki['forecasts'][1]['day']['humidity'] + u"%，降水確率は" \
+                                    + result_takatsuki['forecasts'][1]['day']['chance_precip'] + u"%だよ．"
+
+                api.PostUpdate(status=weather_takatsuki)
+
+            elif 'Night' in argv[3]:
+                weather_kobe = "@" + "kensuke_linx" + " " + u"明日の夜の神戸は" \
+                               + result_kobe['forecasts'][1]['night']['text'] + u"，気温は" \
+                               + result_kobe['forecasts'][1]['low'] + u"~" + result_kobe['forecasts'][1]['high'] \
+                               + u"℃，湿度は" + result_kobe['forecasts'][1]['night']['humidity'] + u"%，降水確率は" \
+                               + result_kobe['forecasts'][1]['night']['chance_precip'] + u"%だよ．"
+
+                api.PostUpdate(status=weather_kobe)
+
+                weather_takatsuki = "@" + "kensuke_linx" + " " + u"明日の夜の高槻は" \
+                                    + result_takatsuki['forecasts'][1]['night']['text'] + u"，気温は" \
+                                    + result_takatsuki['forecasts'][1]['low'] + u"~" + result_takatsuki['forecasts'][1]['high'] \
+                                    + u"℃，湿度は" + result_takatsuki['forecasts'][1]['night']['humidity'] + u"%，降水確率は" \
+                                    + result_takatsuki['forecasts'][1]['night']['chance_precip'] + u"%だよ．"
+
+                api.PostUpdate(status=weather_takatsuki)
+
+    elif 'Event' in argv[1]:
+        if 'Today' in argv[2]:
+            # Google Calendar APIを用いて，イベント情報を取得する
+            entire_event = getEvent.main(argv)
+
+            # イベント情報を呟く
+            tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entire_event)) + u"件あるよ．"
             api.PostUpdate(status=tweet_text)
 
-            num += 1
+            num = 0
+            while num < len(entire_event):
+                event_item = entire_event[num]
+                event_summary = event_item[0]
+                event_time = event_item[1]
+
+                tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + event_summary + " " + u"で，開始時間は" \
+                                 + " " + event_time + " " + u"だよ．"
+                api.PostUpdate(status=tweet_text)
+
+                num += 1
+
+        elif 'Tomorrow' in argv[2]:
+            # Google Calendar APIを用いて，イベント情報を取得する
+            entire_event = getEvent.main(argv)
+
+            # イベント情報を呟く
+            tweet_text = "@" + "kensuke_linx" + " " + u"明日のイベントは，" + str(len(entire_event)) + u"件あるよ．"
+            api.PostUpdate(status=tweet_text)
+
+            num = 0
+            while num < len(entire_event):
+                event_item = entire_event[num]
+                event_summary = event_item[0]
+                event_time = event_item[1]
+
+                tweet_text = "@" + "kensuke_linx" + " " + str(num + 1) + u"件目は" + " " + event_summary + " " + u"で，開始時間は" \
+                                 + " " + event_time + " " + u"だよ．"
+                api.PostUpdate(status=tweet_text)
+
+                num += 1
 
     # 6:45
     elif 'Shower' in argv[1]:
@@ -91,13 +164,6 @@ def main(argv):
 
         # Tweetする
         api.PostUpdate(status=tweet_text)
-
-    # # 21:30
-    # elif 'BeforeSleep' in argv[1]:
-    #     tweet_text = "@" + "kensuke_linx" + " " + u"電子機器の電源をすべて切って，寝るだけにしよう．"
-    #
-    #     # Tweetする
-    #     api.PostUpdate(status=tweet_text)
 
     # 22:00
     elif 'Sleep' in argv[1]:
