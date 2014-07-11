@@ -111,7 +111,7 @@ def main(argv):
     elif 'Event' in argv[1]:
         if 'Today' in argv[2]:
             # Google Calendar APIを用いて，イベント情報を取得する
-            entire_event = getEvent.main(argv)
+            entire_event = getEvent.main(argv, 0)
 
             tweet_text = "@" + "kensuke_linx" + " " + u"本日のイベントは，" + str(len(entire_event)) + u"件あるよ．"
             api.PostUpdate(status=tweet_text)
@@ -130,7 +130,7 @@ def main(argv):
 
         elif 'Tomorrow' in argv[2]:
             # Google Calendar APIを用いて，イベント情報を取得する
-            entire_event = getEvent.main(argv)
+            entire_event = getEvent.main(argv, 1)
 
             tweet_text = "@" + "kensuke_linx" + " " + u"明日のイベントは，" + str(len(entire_event)) + u"件あるよ．"
             api.PostUpdate(status=tweet_text)

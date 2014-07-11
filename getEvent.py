@@ -22,12 +22,12 @@ import t_key
 import datetime
 
 
-def main(argv):
+def main(argv, date):
     service = getservice(argv)
 
     # dateで本日の日付を拾得
     # 表示したい日付は，ここでイジれる（timedeltaに0を渡すと今日のイベント表示，1だと明日…）
-    now = datetime.date.today() + datetime.timedelta(0)
+    now = datetime.date.today() + datetime.timedelta(date)
 
     # dateをstringに変換
     nowstr = now.strftime('%Y-%m-%d')
@@ -124,4 +124,4 @@ def getevent(nowstr, service, calendars):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    main(sys.argv, 0)
