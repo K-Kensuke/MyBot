@@ -196,6 +196,7 @@ def main(argv):
     elif 'Log' in argv[1]:
         log_text = unicode(argv[2], "utf-8")
         tweet_text = log_text
+        print tweet_text
         api.PostUpdate(status=tweet_text)
 
 
