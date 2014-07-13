@@ -195,9 +195,21 @@ def main(argv):
 
     elif 'Log' in argv[1]:
         log_text = unicode(argv[2], "utf-8")
-        tweet_text = log_text
-        print tweet_text
-        api.PostUpdate(status=tweet_text)
+        if len(log_text) > 140:
+            log_text_list = split_str(log_text, 140)
+
+            for text in log_text_list:
+                api.PostUpdate(status=text)
+        else:
+            tweet_text = log_text
+            print tweet_text
+            api.PostUpdate(status=tweet_text)
+
+
+def split_str(s, n):
+    # Split string by its length
+    length = len(s)
+    return [s[i:i+n] for i in range(0, length, n)]
 
 
 if __name__ == '__main__':
