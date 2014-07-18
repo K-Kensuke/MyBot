@@ -202,7 +202,6 @@ def main(argv):
                 api.PostUpdate(status=text)
         else:
             tweet_text = log_text
-            print tweet_text
             api.PostUpdate(status=tweet_text)
 
 
