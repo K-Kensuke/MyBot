@@ -204,6 +204,15 @@ def main(argv):
             tweet_text = log_text
             api.PostUpdate(status=tweet_text)
 
+    elif 'Memory' in argv[1]:
+        memory_temp = subprocess.check_output("""free | grep - | awk '{print $3 "-" $4}'""", shell=True).rstrip()
+        memory = unicode(memory_temp, "utf-8").split("-")
+        now = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
+
+        tweet_text = now + u"現在のサーバのメモリ使用状況は，" + memory[0] + u"/" + str(int(memory[0]) + int(memory[1])) + u"だよ．"
+
+        api.PostUpdate(status=tweet_text)
+
 
 def split_str(s, n):
     # Split string by its length
